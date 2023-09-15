@@ -1,1 +1,14 @@
+public static BlockSuggestionHandler testHandler = (req, ctx) -> {
+        CompletableFuture.supplyAsync(() -> {
+            try {
+                apiResponse = callToExternalApi();
+                BlockSuggestionResponse resp = BlockSuggestionResponse.builder().build();
+                resp.setOptions(options);
+                return ctx.ack(apiResponse);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        }).thenApply(res -> res);
 
+        return ctx.ack();
+}
