@@ -1,7 +1,7 @@
 public static BlockSuggestionHandler testHandler = (req, ctx) -> {
         CompletableFuture.supplyAsync(() -> {
             try {
-                apiResponse = callToExternalApi();
+                apiResponse = callToExternalApi(); // calling external api which is taking more than 3 sec to respond
                 BlockSuggestionResponse resp = BlockSuggestionResponse.builder().build();
                 resp.setOptions(options);
                 return ctx.ack(apiResponse);
